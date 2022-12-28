@@ -1,0 +1,18 @@
+image: node:18.9.0
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build & Push to ECR
+          services:
+            - docker
+          script:
+            - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awc-cli.zip"
+            - unzip awc-cli.zip
+            - ./aws/install
+            -  aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin "$AWS_ECR_REPO_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+            - IMAGE="$AWS_ECR_REPO_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$AWS_ECR_REPO_NAME:latest"
+            - docker build -t $AWS_ECR_REPO_NAME:latest .
+            - docker tag $AWS_ECR_REPO_NAME:latest $IMAGE
+            - docker push $IMAGE
