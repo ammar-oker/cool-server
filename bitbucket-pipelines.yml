@@ -16,3 +16,8 @@ pipelines:
             - docker build -t $AWS_ECR_REPO_NAME:latest .
             - docker tag $AWS_ECR_REPO_NAME:latest $IMAGE
             - docker push $IMAGE
+      - step:
+          name: Release to Rancher
+          deployment: production
+          script:
+            - ./release.sh
