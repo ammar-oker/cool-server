@@ -8,6 +8,7 @@ pipelines:
           services:
             - docker
           script:
+            - yarn config set version-git-message "[skip ci] - version %s - build no $BITBUCKET_BUILD_NUMBER"
             - yarn version --patch
             - git push --follow-tags
 
