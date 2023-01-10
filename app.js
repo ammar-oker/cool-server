@@ -4,7 +4,7 @@ const app = Express();
 const PORT = 3000;
 
 app.get('/hello', (req, res) => {
-    res.send('<h1>Hello, rancher! V3.0</h1>');
+    res.send(`<h1>Hello, rancher! ${require('./package.json').version}</h1>`);
 });
 
 app.listen(PORT, () => {
