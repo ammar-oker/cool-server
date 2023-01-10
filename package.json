@@ -1,6 +1,6 @@
 {
   "name": "my-cool-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "git@bitbucket.org:rising-dev/my-cool-server.git",
   "author": "umurerman <115986150+umurerman@users.noreply.github.com>",
