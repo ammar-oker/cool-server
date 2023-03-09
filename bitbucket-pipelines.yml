@@ -1,5 +1,8 @@
 image: node:18.9.0
 
+# TODO: implement version creation rollback in case of failure
+# see https://bitbucket.org/blog/after-scripts-now-available-for-bitbucket-pipelines
+
 pipelines:
   branches:
     main:
@@ -24,11 +27,3 @@ pipelines:
             - docker build -t $AWS_ECR_REPO_NAME:$VERSION .
             - docker tag $AWS_ECR_REPO_NAME:$VERSION $IMAGE
             - docker push $IMAGE
-
-
-
-#      - step:
-#          name: Release to Rancher
-#          deployment: production
-#          script:
-#            - ./release.sh
